@@ -1,4 +1,4 @@
-VERSION          := 0.2.9
+VERSION          := 0.3.0
 TAG              := v$(VERSION)
 REGISTRY         ?= quay.io
 ORG              ?= rh-nfv-int
@@ -100,7 +100,7 @@ run: manifests generate fmt vet ## Run a controller from your host.
 	go run ./main.go
 
 docker-build: build ## Build docker image with the manager.
-	${CONTAINER_CLI} build -t ${IMG} .
+	BUILDAH_FORMAT=docker ${CONTAINER_CLI} build -t ${IMG} .
 	${CONTAINER_CLI} push ${IMG}
 
 ##@ Deployment
